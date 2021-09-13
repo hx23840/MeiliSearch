@@ -45,8 +45,8 @@ pub struct IndexerOpts {
     /// Grenad chunks while indexing documents.
     ///
     /// Choosing a fast algorithm will make the indexing faster but may consume more memory.
-    #[structopt(long, default_value = "snappy", possible_values = &["snappy", "zlib", "lz4", "lz4hc", "zstd"])]
-    pub chunk_compression_type: CompressionType,
+    #[structopt(long, possible_values = &["snappy", "zlib", "lz4", "lz4hc", "zstd"])]
+    pub chunk_compression_type: Option<CompressionType>,
 
     /// The level of compression of the chosen algorithm.
     #[structopt(long, requires = "chunk-compression-type")]
@@ -64,7 +64,7 @@ impl Default for IndexerOpts {
             max_nb_chunks: None,
             max_memory: MaxMemory::default(),
             documents_chunk_size: Byte::from_bytes(10 * 1024 * 1024),
-            chunk_compression_type: CompressionType::None,
+            chunk_compression_type: None,
             chunk_compression_level: None,
             indexing_jobs: None,
         }

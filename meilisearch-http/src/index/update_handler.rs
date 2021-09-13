@@ -32,7 +32,7 @@ impl UpdateHandler {
             log_frequency: opt.log_every_n,
             max_memory: opt.max_memory.map(|m| m.get_bytes() as usize),
             documents_chunk_size: opt.documents_chunk_size.get_bytes() as usize,
-            chunk_compression_type: opt.chunk_compression_type,
+            chunk_compression_type: opt.chunk_compression_type.unwrap_or(CompressionType::None),
         })
     }
 
