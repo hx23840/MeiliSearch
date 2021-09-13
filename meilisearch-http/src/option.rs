@@ -38,6 +38,9 @@ pub struct IndexerOpts {
     #[structopt(long, default_value)]
     pub max_memory: MaxMemory,
 
+    #[structopt(long, default_value = "10 MiB")]
+    pub documents_chunk_size: Byte,
+
     /// The name of the compression algorithm to use when compressing intermediate
     /// Grenad chunks while indexing documents.
     ///
@@ -60,6 +63,7 @@ impl Default for IndexerOpts {
             log_every_n: 100_000,
             max_nb_chunks: None,
             max_memory: MaxMemory::default(),
+            documents_chunk_size: Byte::from_bytes(10 * 1024 * 1024),
             chunk_compression_type: CompressionType::None,
             chunk_compression_level: None,
             indexing_jobs: None,
